@@ -41,5 +41,6 @@ linter:
     prefer_interpolation_to_compose_strings: true
     prefer_expression_function_bodies: true
     directives_ordering: true
+    
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

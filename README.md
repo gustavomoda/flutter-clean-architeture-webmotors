@@ -4,7 +4,7 @@ The Flutter's test to Webmotor.
 
 ## Geting start
 - Install flutter versoion 2.10.3
-- Run the code:
+- Run the code in the Simultatoros Devices (project without keys, team and certificates):
 
     flutter run 
 
