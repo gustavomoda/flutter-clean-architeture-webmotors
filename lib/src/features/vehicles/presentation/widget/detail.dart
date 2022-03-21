@@ -8,16 +8,16 @@ import 'more_info.dart';
 import 'price.dart';
 import 'year.dart';
 
-class VechileCard extends StatefulWidget {
-  const VechileCard({Key? key, required this.vehicle}) : super(key: key);
+class VechileDetail extends StatefulWidget {
+  const VechileDetail({Key? key, required this.vehicle}) : super(key: key);
 
   final Vehicle vehicle;
 
   @override
-  State<VechileCard> createState() => _VechileCardState();
+  State<VechileDetail> createState() => _State();
 }
 
-class _VechileCardState extends State<VechileCard> {
+class _State extends State<VechileDetail> {
   late double width;
   late double height;
   late MediaHelper mediaHelper;
@@ -48,19 +48,20 @@ class _VechileCardState extends State<VechileCard> {
         children: [
           VechileImage(vehicle: widget.vehicle),
           Container(
-              width: double.infinity,
-              color: Colors.grey.withOpacity(0.2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  VechilePrice(vehicle: widget.vehicle),
-                  VechileMake(vehicle: widget.vehicle),
-                  Padding(
-                    padding: EdgeInsets.only(right: _innerBodyPaddding.right),
-                    child: VechileYear(vehicle: widget.vehicle),
-                  ),
-                ],
-              )),
+            width: double.infinity,
+            color: Colors.grey.withOpacity(0.2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                VechilePrice(vehicle: widget.vehicle),
+                VechileMake(vehicle: widget.vehicle),
+                Padding(
+                  padding: EdgeInsets.only(right: _innerBodyPaddding.right),
+                  child: VechileYear(vehicle: widget.vehicle),
+                ),
+              ],
+            ),
+          ),
           Padding(
             padding: _innerBodyPaddding.copyWith(top: mediaHelper.bHeight(2)),
             child: Text(

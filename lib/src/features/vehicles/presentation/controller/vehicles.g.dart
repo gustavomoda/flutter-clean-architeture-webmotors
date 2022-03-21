@@ -39,6 +39,21 @@ mixin _$VehiclesController on VehiclesControllerBase, Store {
     });
   }
 
+  final _$errorMessageAtom = Atom(name: 'VehiclesControllerBase.errorMessage');
+
+  @override
+  String get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   final _$vehiclesAtom = Atom(name: 'VehiclesControllerBase.vehicles');
 
   @override
@@ -75,6 +90,7 @@ mixin _$VehiclesController on VehiclesControllerBase, Store {
     return '''
 currentPage: ${currentPage},
 state: ${state},
+errorMessage: ${errorMessage},
 vehicles: ${vehicles}
     ''';
   }

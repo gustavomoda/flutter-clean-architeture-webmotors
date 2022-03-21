@@ -18,7 +18,7 @@ class _VehicleService implements VehicleService {
   @override
   Future<HttpResponse<List<Vehicle>>> vehicles({page = 1}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'Passssge': page};
+    final queryParameters = <String, dynamic>{r'Page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

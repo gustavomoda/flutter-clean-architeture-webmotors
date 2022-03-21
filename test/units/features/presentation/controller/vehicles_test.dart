@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gmodawebmotor/src/features/vehicles/domain/entities/vehicle.dart';
-import 'package:gmodawebmotor/src/features/vehicles/domain/services/vehicles.dart';
 import 'package:gmodawebmotor/src/features/vehicles/domain/usecases/get_veichiles.dart';
 import 'package:gmodawebmotor/src/features/vehicles/presentation/controller/vehicles.dart';
 import 'package:gmodawebmotor/src/injector.dart';
+import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -23,7 +23,7 @@ void main() {
         final mockGetVehicles = MockGetVehicles();
 
         // Creating target to test
-        final controller = VehiclesController(mockGetVehicles);
+        final controller = VehiclesController(mockGetVehicles, injector<Logger>());
 
         // Defining Beheave
         when(mockGetVehicles.noMoreRecords).thenReturn(false);
@@ -46,7 +46,7 @@ void main() {
         final mockGetVehicles = MockGetVehicles();
 
         // Creating target to test
-        final controller = VehiclesController(mockGetVehicles);
+        final controller = VehiclesController(mockGetVehicles, injector<Logger>());
 
         // Defining Beheave
         when(mockGetVehicles.startFetch()).thenAnswer((_) async => Future.value(expectedData.sublist(0, 10)));
@@ -71,7 +71,7 @@ void main() {
         final mockGetVehicles = MockGetVehicles();
 
         // Creating target to test
-        final controller = VehiclesController(mockGetVehicles);
+        final controller = VehiclesController(mockGetVehicles, injector<Logger>());
 
         // Defining Beheave
         when(mockGetVehicles.startFetch()).thenAnswer((_) async => Future.value(expectedData));
@@ -96,7 +96,7 @@ void main() {
         final mockGetVehicles = MockGetVehicles();
 
         // Creating target to test
-        final controller = VehiclesController(mockGetVehicles);
+        final controller = VehiclesController(mockGetVehicles, injector<Logger>());
 
         // Defining Beheave
         when(mockGetVehicles.fetchMore()).thenThrow(Exception('ssss'));
