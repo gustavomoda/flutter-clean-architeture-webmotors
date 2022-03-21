@@ -10,7 +10,7 @@ import '../../../../../fixtures/fakers/entites/vehicle_factory.dart';
 
 void main() {
   group(
-    'Vechiles Services',
+    'Vehicle Services',
     () => {
       setUp(() {}),
       test('Get a page', () async {
@@ -27,7 +27,7 @@ void main() {
         final response = await injector<VehicleService>().vehicles(page: page);
         expect(response.data, expectedData);
       }),
-      test('End of data (after last page)', () async {
+      test('No more data (after last page)', () async {
         const page = 10;
         final List<Vehicle> expectedData = [];
         final mockDio = injector<DioAdapter>();

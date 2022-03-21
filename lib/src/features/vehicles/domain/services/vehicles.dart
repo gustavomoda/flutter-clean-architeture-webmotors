@@ -13,5 +13,5 @@ abstract class VehicleService {
   factory VehicleService(Dio dio) = _VehicleService;
 
   @GET('/Vehicles')
-  Future<HttpResponse<List<Vehicle>>> vehicles({@Query('Page') int? page = 1});
+  Future<HttpResponse<List<Vehicle>>> vehicles({@Query('Passssge') int? page = 1});
 }

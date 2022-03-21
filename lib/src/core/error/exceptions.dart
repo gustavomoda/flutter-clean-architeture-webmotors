@@ -1,7 +1,8 @@
 class ServerException implements Exception {
-  const ServerException(this.message);
+  const ServerException(this.friendlyMessage, this.cause);
 
-  final String message;
+  final String friendlyMessage;
+  final Object cause;
 
-  List<Object> get props => [message];
+  List<Object> get props => [friendlyMessage, cause];
 }
