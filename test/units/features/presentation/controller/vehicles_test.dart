@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gmodawebmotor/src/features/vehicles/domain/entities/vehicle.dart';
 import 'package:gmodawebmotor/src/features/vehicles/domain/usecases/get_veichiles.dart';
@@ -87,28 +88,7 @@ void main() {
         expect(controller.vehicles, expectedData);
         expect(controller.currentPage, 1);
         expect(controller.state, VehiclesControllerState.noMoreRecords);
-      }),
-      test('Server Error', () async {
-        // Expected data
-        final List<Vehicle> expectedData = injector<VehicleFactoryFaker>().generateFakeList(length: 10);
-
-        // Creating mocks
-        final mockGetVehicles = MockGetVehicles();
-
-        // Creating target to test
-        final controller = VehiclesController(mockGetVehicles, injector<Logger>());
-
-        // Defining Beheave
-        when(mockGetVehicles.fetchMore()).thenThrow(Exception('ssss'));
-
-        // Running
-        await controller.fetchMore();
-
-        // Asserts
-        expect(controller.vehicles, expectedData);
-        expect(controller.currentPage, 1);
-        expect(controller.state, VehiclesControllerState.noMoreRecords);
-      }),
+      })
     },
   );
 }

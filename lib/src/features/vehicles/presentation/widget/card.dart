@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/media_helpers.dart';
 import '../../domain/entities/vehicle.dart';
 import 'image.dart';
@@ -41,39 +42,42 @@ class _VechileCardState extends State<VechileCard> {
       vertical: mediaHelper.bVertical(0.4),
       horizontal: mediaHelper.bHorizontal(4),
     );
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: height, minWidth: width),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          VechileImage(vehicle: widget.vehicle),
-          Container(
-              width: double.infinity,
-              color: Colors.grey.withOpacity(0.2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  VechilePrice(vehicle: widget.vehicle),
-                  VechileMake(vehicle: widget.vehicle),
-                  Padding(
-                    padding: EdgeInsets.only(right: _innerBodyPaddding.right),
-                    child: VechileYear(vehicle: widget.vehicle),
-                  ),
-                ],
-              )),
-          Padding(
-            padding: _innerBodyPaddding.copyWith(top: mediaHelper.bHeight(2)),
-            child: Text(
-              widget.vehicle.version,
-              style: theme.textTheme.subtitle1,
+    return InkWell(
+      onTap: () => AppRoutes.router.push(AppRoutes.vehicle, extra: widget.vehicle),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: height, minWidth: width),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            VechileImage(vehicle: widget.vehicle),
+            Container(
+                width: double.infinity,
+                color: Colors.grey.withOpacity(0.2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    VechilePrice(vehicle: widget.vehicle),
+                    VechileMake(vehicle: widget.vehicle),
+                    Padding(
+                      padding: EdgeInsets.only(right: _innerBodyPaddding.right),
+                      child: VechileYear(vehicle: widget.vehicle),
+                    ),
+                  ],
+                )),
+            Padding(
+              padding: _innerBodyPaddding.copyWith(top: mediaHelper.bHeight(2)),
+              child: Text(
+                widget.vehicle.version,
+                style: theme.textTheme.subtitle1,
+              ),
             ),
-          ),
-          Padding(
-            padding: _innerBodyPaddding,
-            child: VechileMoreInfo(vehicle: widget.vehicle),
-          ),
-          Divider(height: mediaHelper.bHeight(10), thickness: 2),
-        ],
+            Padding(
+              padding: _innerBodyPaddding,
+              child: VechileMoreInfo(vehicle: widget.vehicle),
+            ),
+            Divider(height: mediaHelper.bHeight(10), thickness: 2),
+          ],
+        ),
       ),
     );
   }

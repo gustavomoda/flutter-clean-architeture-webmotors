@@ -45,7 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Expanded(child: Text(e.value)),
               Icon(
                 isSelected ? Icons.radio_button_on : Icons.radio_button_off,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ],
           ),

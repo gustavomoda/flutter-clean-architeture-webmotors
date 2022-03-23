@@ -2,7 +2,7 @@
 
 The Flutter test for Webmotors company to display vehicles.
 
-The goal of this app is to evaluate senior programming  skills.
+The goal of this app is to evaluate senior programming skills.
 
 ---
 

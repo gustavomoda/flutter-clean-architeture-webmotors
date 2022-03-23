@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:logger/logger.dart';
+import '../../../../config/routes/app_routes.dart';
+import '../../../../core/controllers/theme.dart';
 import '../../../../core/widget/custom_app_bar.dart';
 import '../../../../core/widget/message_error_try_agai.dart';
 import '../../../../injector.dart';

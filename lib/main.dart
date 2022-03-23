@@ -25,20 +25,65 @@ Future<void> main() async {
   });
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final themeController = injector<ThemeController>();
-    return Observer(
-      builder: (context) => MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: kAppTitle,
-        theme: themeController.themeData,
-        routeInformationParser: AppRoutes.router.routeInformationParser,
-        routerDelegate: AppRoutes.router.routerDelegate,
-      ),
-    );
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> with WidgetsBindingObserver {
+  late ThemeData currentTheme;
+  late final ThemeController themeController;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    themeController = injector<ThemeController>();
+    currentTheme = themeController.themeData;
+    defineThemeFromSystem();
+  }
+
+  @override
+  Widget build(BuildContext context) => Observer(builder: (context) {
+        currentTheme = themeController.themeData;
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: kAppTitle,
+          theme: currentTheme,
+          routeInformationParser: AppRoutes.router.routeInformationParser,
+          routerDelegate: AppRoutes.router.routerDelegate,
+          builder: (context, child) => child ?? const Scaffold(),
+        );
+      });
+
+  Future<void> defineThemeFromSystem() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    if (!mounted) {
+      return;
+    }
+    final _context = AppRoutes.router.routerDelegate.navigatorKey.currentContext;
+    if (_context == null) {
+      return;
+    }
+    final platformBrightness = MediaQuery.of(_context).platformBrightness;
+    if (platformBrightness != themeController.brightness) {
+      themeController.change(platformBrightness);
+      setState(() {});
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        defineThemeFromSystem();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 }

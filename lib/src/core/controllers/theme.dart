@@ -1,11 +1,8 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../config/themes/app_theme.dart';
-
-// import '../../config/themes/app_theme.dart';
 
 part 'theme.g.dart';
 
@@ -28,6 +25,10 @@ abstract class ThemeControllerBase with Store {
 
   @computed
   bool get isDarkMode => brightness == Brightness.dark;
+
+  void init(Brightness brightness) {
+    this.brightness = brightness;
+  }
 
   @action
   void change(Brightness brightness) {
